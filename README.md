@@ -1,68 +1,71 @@
-# 🐯 AlumLink | RIT 
-**Bridging the gap between RIT students and alumni through meaningful mentorship.**
+# AlumLink 🔗
 
-AlumLink is a lightweight, full-stack networking platform designed specifically for the RIT community. It allows students to register with their university credentials, select their technical interests, and connect with experienced mentors from the alumni network.
+**AlumLink** is a high-performance mentorship ecosystem designed to bridge the gap between ambitious students and elite alumni. Built for the **RIT** community, it transforms how students seek career guidance, technical mentorship, and professional networking.
 
----
-
-## ✨ Key Features
-* **RIT Authentication:** Domain-restricted registration ensures only `@rit.edu` users can access student features.
-* **Dual-Portal System:** Dedicated workflows for **Students** (discovery-focused) and **Mentors** (directory-focused).
-* **Glassmorphism UI:** A modern, high-contrast interface built with Tailwind CSS and Lucide icons.
-* **Interest Tagging:** Match students and mentors based on shared domains like AI, Cloud, and UI/UX.
-* **Secure Mentor Access:** Alumni-specific access codes to protect the student directory.
+### 🌐 [Visit the Live Platform](https://tinkherhack-pied.vercel.app/)
 
 ---
 
-## 🛠️ Tech Stack
-* **Frontend:** HTML5, Tailwind CSS, JavaScript (ES6+).
-* **Backend:** Node.js, Express.js.
-* **Database:** MongoDB via Mongoose ODM.
-* **Icons:** Lucide-JS.
-* **Typography:** Plus Jakarta Sans.
+## ✨ Prize-Winning Features
 
----
+* **Elite Matching Algorithm:** Uses a profile-strength radar to ensure students are paired with mentors who match their career trajectory.
+* **Women Empowerment Hub:** A dedicated, themed portal (Women’s Connect) designed to foster female mentorship in STEM, developed specifically for the **TinkHerHack** mission.
+* **Interactive Project Showcase:** Move beyond resumes; students can publish live project cards for alumni to review and critique.
+* **Glassmorphism 2.0 UI:** A high-end, professional aesthetic utilizing mesh gradients, blur-saturation, and micro-interactions for a world-class user experience.
 
-## 🚀 Getting Started
+## 🛠️ The Stack
 
-### 1. Prerequisites
-* Node.js (v14 or higher)
-* MongoDB Atlas account or local MongoDB instance
+* **Frontend:** HTML5, CSS3 (Tailwind CSS Architecture), JavaScript (ES6+)
+* **Graphics:** [Lucide Elite Icons](https://lucide.dev/)
+* **Visuals:** Custom SVG Mesh Gradients & CSS Blur Filters
+* **Deployment:** Vercel (Edge Network)
 
-### 2. Installation
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/your-username/alumlink-rit.git](https://github.com/your-username/alumlink-rit.git)
-    cd alumlink-rit
-    ```
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-3.  **Environment Setup:**
-    Create a `.env` file in the root directory and add your MongoDB URI:
-    ```env
-    MONGODB_URI=your_mongodb_connection_string
-    PORT=3000
-    ```
-    project structure
-    ├── server.js           # Express backend & API routes
-├── index.html          # Single-page frontend architecture
-├── .env                 # Environment variables (not tracked)
-└── .gitignore          # File to ignore node_modules and .env
-API endpoints
-Method Endpoint Description
-POST /api/register/student Registers a new student (RIT email required).
-POST /api/login/mentor Validates alumni via access code (RIT2026).
-GET /api/mentors Fetches all available alumni mentors.
-GET /api/students Fetches student directory for mentors.
-Roadmap
-​[ ] Implement JWT for persistent sessions.
-​[ ] Add real-time messaging using Socket.io.
-​[ ] Build an automated matching algorithm based on interest scores.
-​[ ] Add image upload for profile pictures.
-​Developed with ❤️ for the RIT Community.
+## 🏁 Installation & Local Setup
 
-### 3. Running the App
+Since AlumLink Pro is designed for maximum portability and speed, it requires zero database configuration for the initial demo.
+
+1. **Clone the Repo**
 ```bash
-node server.js# tinkherhack
+git clone https://github.com/your-username/alumlink.git
+
+```
+
+
+2. **Run via Node.js** (Optional, for serving files)
+```bash
+npm install express
+node server.js
+
+```
+
+
+3. **Direct Launch**
+Simply open `index.html` in any modern browser.
+
+---
+
+## 🏆 Hackathon Context: TinkHerHack
+
+This project was engineered during **TinkHerHack**, Kerala's premier women-exclusive hackathon.
+
+**The Challenge:** Addressing the lack of industry-student synergy in technical institutions.
+**The Solution:** AlumLink creates a sustainable cycle of mentorship, ensuring that the success of RIT alumni directly fuels the growth of current students, with a primary focus on elevating women in tech.
+
+## 🔐 Access Credentials
+
+| Role | Access Requirement |
+| --- | --- |
+| **Student** | Any `@rit.edu` email |
+| **Mentor** | **Access Code:** `RIT2026` |
+
+---
+
+## 🤝 Community & Support
+
+Built with precision and passion for the **TinkHerHack** community. If you find this project impactful, consider giving it a ⭐ on GitHub!
+
+**Website:** [tinkherhack-pied.vercel.app](https://tinkherhack-pied.vercel.app/)
+
+---
+
+<img width="1695" height="724" alt="image" src="https://github.com/user-attachments/assets/6970f3df-1276-41af-adf8-5ee2de7e8299" />
