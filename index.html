@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AlumLink Elite | The RIT Standard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --rit-orange: #F76902; --rit-gray: #374151; }
+        
+        /* High-End Mesh Background */
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(28,100%,74%,0.1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(189,100%,56%,0.08) 0, transparent 50%);
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+        /* Glassmorphism 2.0 */
+        .glass-elite { 
+            background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(25px) saturate(200%); 
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+        }
+
+        /* Animated Progress Pulse */
+        .pulse-orange {
+            box-shadow: 0 0 0 0 rgba(247, 105, 2, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            70% { box-shadow: 0 0 0 15px rgba(247, 105, 2, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(247, 105, 2, 0); }
+        }
+
+        /* Interactive Card Hover */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.01);
+            background: white;
+            border-color: var(--rit-orange);
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="p-4 lg:p-12">
+
+    <nav class="max-w-7xl mx-auto mb-16 flex justify-between items-center p-6 glass-elite rounded-[2.5rem] sticky top-8 z-[100]">
+        <div class="flex items-center gap-4">
+            <div class="bg-slate-900 p-3 rounded-2xl pulse-orange">
+                <i data-lucide="shield-check" class="text-orange-500 w-6 h-6"></i>
+            </div>
+            <h1 class="text-2xl font-black tracking-tighter uppercase">Alum<span class="text-orange-500">Link</span></h1>
+        </div>
+        <div id="nav-meta" class="hidden flex items-center gap-8">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-ping"></div>
+                <span class="text-[10px] font-bold tracking-widest opacity-40 uppercase">Server Live</span>
+            </div>
+            <button onclick="location.reload()" class="p-3 bg-slate-100 rounded-full hover:rotate-90 transition-transform duration-500"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button>
+        </div>
+    </nav>
+
+    <div id="view-auth" class="max-w-4xl mx-auto text-center mt-24">
+        <h2 class="text-7xl font-black mb-6 tracking-tighter text-slate-900">Elevate Your <span class="text-orange-500 italic">Network.</span></h2>
+        <p class="text-slate-500 text-xl mb-12 max-w-2xl mx-auto font-light">The RIT standard for elite mentorship and professional growth.</p>
+        <div class="flex justify-center gap-6">
+            <button onclick="triggerLogin('student')" class="px-12 py-6 bg-slate-900 text-white rounded-3xl font-bold shadow-2xl hover:bg-orange-600 transition-all duration-300">Student Portal</button>
+            <button onclick="triggerLogin('mentor')" class="px-12 py-6 bg-white border border-slate-200 rounded-3xl font-bold hover:shadow-xl transition-all duration-300">Alumni Access</button>
+        </div>
+    </div>
+
+    <div id="modal-onboard" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xl z-[200] hidden flex items-center justify-center p-6">
+        <div class="bg-white rounded-[4rem] p-16 max-w-lg w-full shadow-2xl border border-white/20">
+            <div id="onboard-step-1">
+                <h3 class="text-4xl font-black mb-2 italic">Identity.</h3>
+                <p class="text-slate-400 mb-10 text-sm">Tell us who you are in the Tiger ecosystem.</p>
+                <div class="space-y-4">
+                    <input type="text" id="user-name" placeholder="Preferred Name" class="w-full p-5 bg-slate-50 rounded-2xl outline-none focus:ring-2 ring-orange-100 transition-all">
+                    <input type="email" id="user-email" placeholder="username@rit.edu" class="w-full p-5 bg-slate-50 rounded-2xl outline-none">
+                    <div id="mentor-auth" class="hidden">
+                        <input type="password" id="access-code" placeholder="Master Access Code (RIT2026)" class="w-full p-5 bg-orange-50 rounded-2xl border border-orange-100 outline-none">
+                    </div>
+                    <button onclick="validateOnboarding()" class="w-full py-6 bg-orange-500 text-white rounded-3xl font-bold shadow-lg shadow-orange-200 mt-6">Initialize Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-dash" class="hidden max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-4 gap-10">
+            
+            <div class="lg:col-span-1 space-y-8">
+                <div class="glass-elite p-10 rounded-[3rem]">
+                    <h4 class="text-xs font-black opacity-30 uppercase tracking-[0.2em] mb-8">Match Status</h4>
+                    <div class="relative w-32 h-32 mx-auto mb-8">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="64" cy="64" r="60" stroke="#f1f5f9" stroke-width="8" fill="transparent" />
+                            <circle cx="64" cy="64" r="60" stroke="#f76902" stroke-width="8" fill="transparent" stroke-dasharray="376" stroke-dashoffset="100" class="transition-all duration-1000" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center font-black text-2xl">84%</div>
+                    </div>
+                    <p class="text-[10px] text-center opacity-50 font-bold leading-loose">YOUR PROFILE MATCHES <br> ELITE MENTOR STANDARDS</p>
+                </div>
+
+                <div onclick="toggleEmpowerment()" class="cursor-pointer p-8 bg-gradient-to-br from-pink-500 to-rose-600 rounded-[2.5rem] text-white shadow-xl shadow-pink-200 group overflow-hidden relative">
+                    <i data-lucide="sparkles" class="absolute -right-4 -bottom-4 w-32 h-32 opacity-20 group-hover:scale-125 transition-transform duration-700"></i>
+                    <h4 class="font-black text-xl mb-2">Women Connect</h4>
+                    <p class="text-xs opacity-80">Empowering female Tigers via industry alumnae.</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3">
+                <div class="flex justify-between items-center mb-12">
+                    <h3 id="context-title" class="text-4xl font-black italic tracking-tighter">Elite <span class="text-orange-500">Mentors.</span></h3>
+                    <div class="relative w-64">
+                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 opacity-30"></i>
+                        <input type="text" oninput="liveSearch(this.value)" placeholder="Search Tiger Skills..." class="w-full pl-12 pr-4 py-4 rounded-2xl glass-elite border-none outline-none text-xs font-bold">
+                    </div>
+                </div>
+                <div id="main-grid" class="grid md:grid-cols-2 gap-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        let userRole = '';
+        
+        const db = {
+            mentors: [
+                { name: "Sarah Chen", role: "AI Strategist @ Apple", tags: ["AI", "Research"], gender: "female", bio: "Building the next generation of neural engines." },
+                { name: "Marcus Thorne", role: "DevOps @ SpaceX", tags: ["Cloud", "Security"], gender: "male", bio: "Securing infrastructure for interplanetary travel." },
+                { name: "Elena Rossi", role: "UX Director @ Airbnb", tags: ["Design", "UI/UX"], gender: "female", bio: "Defining human-centric interfaces globally." }
+            ],
+            students: [
+                { name: "Jordan Lee", role: "Junior CS Student", tags: ["Python", "Cloud"], bio: "Seeking mentorship in distributed systems." }
+            ]
+        };
+
+        function triggerLogin(role) {
+            userRole = role;
+            document.getElementById('modal-onboard').classList.remove('hidden');
+            document.getElementById('mentor-auth').classList.toggle('hidden', role === 'student');
+        }
+
+        function validateOnboarding() {
+            const email = document.getElementById('user-email').value;
+            const code = document.getElementById('access-code').value;
+
+            if(userRole === 'student' && !email.toLowerCase().endsWith('@rit.edu')) return alert("Access restricted to @rit.edu");
+            if(userRole === 'mentor' && code !== "RIT2026") return alert("Invalid Access Code");
+
+            document.getElementById('modal-onboard').classList.add('hidden');
+            document.getElementById('view-auth').classList.add('hidden');
+            document.getElementById('view-dash').classList.remove('hidden');
+            document.getElementById('nav-meta').classList.remove('hidden');
+            renderGrid(userRole === 'student' ? db.mentors : db.students);
+        }
+
+        function renderGrid(list) {
+            const grid = document.getElementById('main-grid');
+            grid.innerHTML = list.map(item => `
+                <div class="glass-elite p-10 rounded-[3.5rem] card-hover flex flex-col justify-between h-full relative group">
+                    <div class="absolute top-8 right-8 flex gap-2">
+                        ${item.gender === 'female' ? '<div class="w-3 h-3 rounded-full bg-pink-500 shadow-lg shadow-pink-200"></div>' : ''}
+                        <i data-lucide="heart" class="w-4 h-4 opacity-20 hover:text-red-500 cursor-pointer"></i>
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-8 shadow-xl">
+                            <i data-lucide="zap" class="text-orange-500 w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-2xl font-black mb-1">${item.name}</h4>
+                        <p class="text-xs font-black text-orange-600 uppercase tracking-widest mb-6">${item.role}</p>
+                        <p class="text-sm leading-relaxed opacity-60 italic mb-8">"${item.bio}"</p>
+                        <div class="flex gap-2 mb-8">
+                            ${item.tags.map(t => `<span class="text-[9px] font-black uppercase tracking-tighter px-3 py-1 bg-slate-100 rounded-full">#${t}</span>`).join('')}
+                        </div>
+                    </div>
+                    <button class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest group-hover:bg-orange-600 transition-colors">
+                        Initialize Connection
+                    </button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function toggleEmpowerment() {
+            const women = db.mentors.filter(m => m.gender === 'female');
+            renderGrid(women);
+            document.getElementById('context-title').innerHTML = "Women <span class='text-pink-600'>Empowerment.</span>";
+        }
+
+        function liveSearch(val) {
+            const list = userRole === 'student' ? db.mentors : db.students;
+            const filtered = list.filter(i => 
+                i.name.toLowerCase().includes(val.toLowerCase()) || 
+                i.tags.some(t => t.toLowerCase().includes(val.toLowerCase()))
+            );
+            renderGrid(filtered);
+        }
+    </script>
+</body>
+</html>
